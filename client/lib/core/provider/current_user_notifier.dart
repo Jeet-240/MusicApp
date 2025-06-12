@@ -11,6 +11,5 @@ class CurrentUserNotifier extends _$CurrentUserNotifier{
 
   void addUser(UserModel user){
     state = user;
-
   }
 }

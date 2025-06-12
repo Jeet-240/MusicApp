@@ -4,11 +4,13 @@ import 'package:client/core/widget/loader.dart';
 import 'package:client/features/auth/repositories/auth_remote_repository.dart';
 import 'package:client/features/auth/view/pages/signup_page.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:client/features/auth/view/widgets/custom_field.dart';
+import 'package:client/core/widget/custom_field.dart';
 import 'package:client/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart' as fp;
+
+import '../../../home/view/home_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -35,11 +37,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     ref.listen(authViewModelProvider, (_, next) {
       next?.when(
         data: (data) {
-          // TODO : Navigate to home page
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const LoginPage()),
-          // );
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+              (_) => false,
+          );
         },
         error: (error, st) {
           showSnackBar(context, error.toString());

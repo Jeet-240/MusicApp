@@ -3,7 +3,7 @@ import 'package:client/core/utils.dart';
 import 'package:client/core/widget/loader.dart';
 import 'package:client/features/auth/view/pages/Login_page.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:client/features/auth/view/widgets/custom_field.dart';
+import 'package:client/core/widget/custom_field.dart';
 import 'package:client/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
