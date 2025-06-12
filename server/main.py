@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from middleware import auth_middleware
 from models.base import Base
 from routes import auth
 from database import engine
@@ -7,6 +8,7 @@ from database import engine
 
 app = FastAPI()
 app.include_router(auth.router , prefix='/auth')
+
 
 
 #we interact with this to the database

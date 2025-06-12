@@ -1,15 +1,14 @@
-import 'dart:convert';
-
 class UserModel{
   final String name;
   final String email;
   final String id;
+  final String token;
 
-  //<editor-fold desc="Data Methods">
-  const UserModel({
+   UserModel({
     required this.name,
     required this.email,
     required this.id,
+    required this.token,
   });
 
 
@@ -20,7 +19,8 @@ class UserModel{
               runtimeType == other.runtimeType &&
               name == other.name &&
               email == other.email &&
-              id == other.id
+              id == other.id &&
+              token == other.token
           );
 
 
@@ -28,8 +28,8 @@ class UserModel{
   int get hashCode =>
       name.hashCode ^
       email.hashCode ^
-      id.hashCode;
-
+      id.hashCode ^
+      token.hashCode;
 
 
 
@@ -37,11 +37,13 @@ class UserModel{
     String? name,
     String? email,
     String? id,
+    String? token,
   }) {
     return UserModel(
       name: name ?? this.name,
       email: email ?? this.email,
       id: id ?? this.id,
+      token: token ?? this.token,
     );
   }
 
@@ -51,6 +53,7 @@ class UserModel{
       'name': name,
       'email': email,
       'id': id,
+      'token': token,
     };
   }
 
@@ -59,18 +62,19 @@ class UserModel{
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       id: map['id'] ?? '',
+      token: map['token'] ?? '',
     );
   }
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  String toJson() => json.encode(toMap());
-
   @override
   String toString() {
-    return 'UserModel{name: $name, email: $email, id: $id}';
+    return 'UserModel{name: $name, email: $email, id: $id, token: $token}';
   }
+
+
+//</editor-fold>
+
+  //<editor-fold desc="Data Methods">
 
 
 }

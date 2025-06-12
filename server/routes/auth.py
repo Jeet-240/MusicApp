@@ -1,11 +1,14 @@
 import uuid
 import bcrypt
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, Header
 from database import get_db
+from middleware import auth_middleware
 from models.user import User
 from pydantic_schemas.user_create import UserCreate
 from fastapi import APIRouter
 from sqlalchemy.orm import Session
+import jwt
+
 
 from pydantic_schemas.user_login import UserLogin
 
@@ -26,7 +29,8 @@ def signup_user(user: UserCreate , db: Session=Depends(get_db)):
     db.commit() 
     db.refresh(user_db)
 
-    return user_db       
+   
+    
 
 
 @router.post('/login')
@@ -45,6 +49,21 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
         is_match = bcrypt.checkpw(user.password.encode() , user_db.password)
         if not is_match:
             raise HTTPException(400 , 'Incorrect Password')
-        else:
-            return user_db
+    
+    token = jwt.encode({'id' : user_db.id} , 'password_key');
+ 
+    return {'token' : token, 'user' : user_db};   
+
+@router.get('/')
+def current_user_data(db: Session = Depends(get_db), user_dict = Depends(auth_middleware.auth_middleware)):
+    
+    user = db.query(User).filter(User.id == user_dict['u' \
+    'id']).first()
+
+    if not user:
+        raise HTTPException(404, 'User Not Found');
+
+    return user;
+    
+   
   
