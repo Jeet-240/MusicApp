@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
-import 'dart:ui';
 import 'package:client/core/constants/server_constant.dart';
 import 'package:client/core/failure/failure.dart';
+import 'package:client/features/home/song_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,7 @@ part 'home_repository.g.dart';
 HomeRepository homeRepository(Ref ref){
   return HomeRepository();
 }
-class HomeRepository {
+class HomeRepository{
   Future<Either<AppFailure, String>> uploadSong({
     required File selectedAudio,
     required File selectedImage,
@@ -56,7 +57,27 @@ class HomeRepository {
     }catch(e){
       return Left(AppFailure(e.toString()));
     }
-
-
   }
+
+  Future<Either<AppFailure, List<SongModel>>>getAllSongs() async{
+      try{
+        final request = await http.get(
+              Uri.parse('${ServerConstant.serverURL}/song/list'),
+          headers: {'Content-Type': 'application/json'},
+        );
+        if(request.statusCode == 200){
+          final List<dynamic> jsonList = jsonDecode(request.body);
+          final List<SongModel> songs = jsonList.map((song) => SongModel.fromMap(song as Map<String, dynamic>)).toList();
+          return Right(songs);
+        }else{
+          final requestMap = jsonDecode(request.body) as Map<String, dynamic>;
+          return Left(AppFailure(requestMap['detail']));
+        }
+
+      }
+      catch(e){
+        return Left(AppFailure(e.toString()));
+      }
+  }
+
 }
