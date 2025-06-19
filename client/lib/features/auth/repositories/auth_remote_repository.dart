@@ -100,7 +100,7 @@ class AuthRemoteRepository {
           'x-auth-token': token,
         },
       )
-          .timeout(Duration(seconds: 5)); // Add timeout
+          .timeout(Duration(seconds: 20)); // Add timeout
       final responseBodyMap =
       jsonDecode(response.body) as Map<String, dynamic>; // Add timeout
       if (response.statusCode == 200) {

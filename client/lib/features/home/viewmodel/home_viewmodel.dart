@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../song_model.dart';
+import '../model/song_model.dart';
 part 'home_viewmodel.g.dart';
 
 @riverpod

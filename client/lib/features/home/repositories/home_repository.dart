@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:client/core/constants/server_constant.dart';
 import 'package:client/core/failure/failure.dart';
-import 'package:client/features/home/song_model.dart';
+import 'package:client/features/home/model/song_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;

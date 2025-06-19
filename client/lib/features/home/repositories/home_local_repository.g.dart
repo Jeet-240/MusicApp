@@ -1,28 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_local_repository.dart';
+part of 'home_local_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authLocalRepositoryHash() =>
-    r'2796c8fd85db5fdbcd855413bdb1541a0228e0ad';
+String _$homeLocalRepositoryHash() =>
+    r'2c58b6050c445d33c4db4f066755fc9b104e309c';
 
-/// See also [authLocalRepository].
-@ProviderFor(authLocalRepository)
-final authLocalRepositoryProvider = Provider<AuthLocalRepository>.internal(
-  authLocalRepository,
-  name: r'authLocalRepositoryProvider',
+/// See also [homeLocalRepository].
+@ProviderFor(homeLocalRepository)
+final homeLocalRepositoryProvider =
+    AutoDisposeProvider<HomeLocalRepository>.internal(
+  homeLocalRepository,
+  name: r'homeLocalRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authLocalRepositoryHash,
+      : _$homeLocalRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AuthLocalRepositoryRef = ProviderRef<AuthLocalRepository>;
+typedef HomeLocalRepositoryRef = AutoDisposeProviderRef<HomeLocalRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

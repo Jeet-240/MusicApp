@@ -1,3 +1,4 @@
+import 'package:client/core/provider/current_song_notifier.dart';
 import 'package:client/core/theme/app_pallete.dart';
 import 'package:client/core/widget/loader.dart';
 import 'package:client/features/home/viewmodel/home_viewmodel.dart';
@@ -31,48 +32,52 @@ class SongsPage extends ConsumerWidget {
                       itemCount: songs.length,
                       itemBuilder: (context, index) {
                         final song = songs[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 180,
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(7.0),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      song.thumbnail_url
+                        return GestureDetector(
+                          onTap: (){
+                            ref.read(currentSongNotifierProvider.notifier).updateSong(song);},
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 180,
+                                  height: 180,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        song.thumbnail_url
+                                      ),
+                                      fit: BoxFit.cover,
                                     ),
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                              SizedBox(
-                                width: 180,
-                                child: Text(song.song_name,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  overflow: TextOverflow.ellipsis
-                                ),),
-                              ),
-                              const SizedBox(height: 10),
-                              SizedBox(
-                                width: 180,
-                                child: Text(song.artist,
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: 180,
+                                  child: Text(song.song_name,
                                   maxLines: 1,
                                   style: TextStyle(
-                                    color: Pallete.subtitleText,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      overflow: TextOverflow.ellipsis
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    overflow: TextOverflow.ellipsis
                                   ),),
-                              )
-                            ],
+                                ),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: 180,
+                                  child: Text(song.artist,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: Pallete.subtitleText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        overflow: TextOverflow.ellipsis
+                                    ),),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
